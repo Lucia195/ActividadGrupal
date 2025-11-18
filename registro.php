@@ -1,25 +1,23 @@
-<?php
-// Incluye tu archivo de conexión a la base de datos aquí si es necesario
-// include 'conexion.php'; 
-
-$errores = array(); // Inicializa el array de errores
+<?php 
+require_once "InsercionesDAO.class.php";
+$errores = array();
 $mensaje_exito = '';
 
-// 1. Procesamiento del formulario
-/* if (isset($_POST['registro'])) {
-    
+//Proceso para el formulario
+ if (isset($_POST['registro'])) {
     $nombre = trim($_POST['nombre']);
+    $apellidos = trim($_POST['apellidos']);
+    $edad = trim($_POST['edad']);
+    $email = trim($_POST['email']);
     $contrasena = $_POST['contrasena'];
     $contrasena2 = $_POST['contrasena2'];
     
-    // 2. Validación
-    if (empty($nombre) || empty($contrasena) || empty($contrasena2)) {
-        $errores[] = "Todos los campos son obligatorios.";
-    }
-
     if ($contrasena !== $contrasena2) {
         $errores[] = "Las contraseñas no coinciden.";
+    }else{
+        $resultado = InsercionesDAO::registrarUsuario($nombre, $apellidos, $edad, $email, $contrasena);
     }
+
     
     // 3. Registro (Si no hay errores)
     if (empty($errores)) {
@@ -28,9 +26,9 @@ $mensaje_exito = '';
         // $pass_hash = password_hash($contrasena, PASSWORD_DEFAULT);
         // Lógica: INSERT INTO usuarios ...
         
-        $mensaje_exito = "¡Registro exitoso! (Añade código de base de datos real)";
+        $mensaje_exito = "El registro se ha completado";
     }
-} */
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
