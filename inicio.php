@@ -76,12 +76,17 @@ $mensaje_exito = '';
                 <div class="campos">
                     <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
                 </div>
-                <button type="submit" name="inicio" id="inicio">Registrar</button>
+                <button type="submit" name="inicio" id="inicio">Iniciar Sesion</button>
             </form>
             
             <p class="footer">© I.E.S. Monte Naranco</p>
         </div>
     </div>
-
+    <div class="pie-login">
+        <p>Si no tienes cuenta:</p>
+        <form action="registro.php" method="post">
+            <button type="submit" class="boton-registro">Registrarse</button>
+        </form>
+    </div>
 </body>
 </html>

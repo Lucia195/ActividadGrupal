@@ -2,6 +2,7 @@
 require_once "InsercionesDAO.class.php";
 $errores = array();
 $mensaje_exito = '';
+$nombre = $apellidos = $edad = $email = '';
 
 //Proceso para el formulario
  if (isset($_POST['registro'])) {
@@ -14,21 +15,23 @@ $mensaje_exito = '';
     
     if ($contrasena !== $contrasena2) {
         $errores[] = "Las contraseñas no coinciden.";
-    }else{
-        $resultado = InsercionesDAO::registrarUsuario($nombre, $apellidos, $edad, $email, $contrasena);
     }
-
-    
-    // 3. Registro (Si no hay errores)
     if (empty($errores)) {
-        
-        // Aquí se ejecutaría la lógica de registro en la base de datos
-        // $pass_hash = password_hash($contrasena, PASSWORD_DEFAULT);
-        // Lógica: INSERT INTO usuarios ...
-        
-        $mensaje_exito = "El registro se ha completado";
+        if (InsercionesDAO::verificarEmailExistente($email)) {
+            $errores[] = "El correo electrónico **$email** ya se encuentra registrado. Por favor, utilice otro.";
+        }
+        if (empty($errores)) {
+            $resultado = InsercionesDAO::registrarUsuario($nombre, $apellidos, $edad, $email, $contrasena);
+            if ($resultado) {
+                $mensaje_exito = "¡El registro se ha completado con éxito!";
+                $nombre = $apellidos = $edad = $email = ''; 
+            } else {
+                $errores[] = "Fallo en el registro. Hubo un error desconocido en la base de datos.";
+            }
+        }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -68,33 +71,31 @@ $mensaje_exito = '';
             ?>
             
             <form action="registro.php" method="POST">
-                
                 <div class="campos">
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required value="<?php echo htmlspecialchars($nombre ?? ''); ?>">
                 </div>
                 <div class="campos">
-                    <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required>
+                    <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" required value="<?php echo htmlspecialchars($apellidos ?? ''); ?>">
                 </div>
                 <div class="campos">
-                    <input type="number" id="edad" name="edad" placeholder="Edad" required>
+                    <input type="number" id="edad" name="edad" placeholder="Edad" required value="<?php echo htmlspecialchars($edad ?? ''); ?>">
                 </div>
                 <div class="campos">
-                    <input type="email" id="email" name="email" placeholder="Email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" required value="<?php echo htmlspecialchars($email ?? ''); ?>">
                 </div>
                 <div class="campos">
                     <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
                 </div>
-                
+
                 <div class="campos">
                     <input type="password" id="contrasena2" name="contrasena2" placeholder="Repita la contraseña" required>
                 </div>
-                
+
                 <button type="submit" name="registro" id="registro">Registrar</button>
             </form>
             
             <p class="footer">© I.E.S. Monte Naranco</p>
         </div>
     </div>
-
 </body>
 </html>

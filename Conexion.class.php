@@ -6,7 +6,7 @@ class Conexion
     private $host = 'localhost';
     private $usuario = 'root';
     private $password = 'root';
-    private $basedatos = 'dwes_laliga';
+    private $basedatos = 'parque_atracciones';
     //Constructor privado
     private function __construct()
     {
