@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding: 2.5rem 1.25rem;
+    min-height: calc(100vh - 9.375rem);
+    background-color: white;
+}
+
+.registro {
+    background-color: white;
+    padding: 2.5rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.3125rem;
+    width: 100%;
+    max-width: 25rem;
+    text-align: center;
+}
+
+.registro h3 {
+    margin-top: 0;
+    margin-bottom: 1.875rem;
+    font-size: 1.5em;
+}
+
+.campos {
+    margin-bottom: 1.25rem;
+}
+
+.campos input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0.0625rem solid #ddd;
+    border-radius: 0.25rem;
+    box-sizing: border-box; 
+    font-size: 1em;
+    text-align: left;
+}
+
+#registro{
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#registro:hover {
+    background-color: #0056b3;
+}
+
+#inicio{
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#inicio:hover {
+    background-color: #0056b3;
+}
+
+.footer {
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.mensaje-error {
+    color: #dc3545;
+    margin-bottom: 0.9375rem;
+    border: 0.0625rem solid #f5c6cb;
+    background-color: #f8d7da;
+    padding: 0.625rem;
+    border-radius: 0.25rem;
+}
+
+.mensaje-exito {
+    color: #28a745;
+    margin-bottom: 0.9375rem;
+    border: 0.0625rem solid #c3e6cb;
+    background-color: #d4edda;
+    padding: 0.625rem;
+    border-radius: 0.25rem;
+}
