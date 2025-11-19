@@ -1,6 +1,6 @@
 <?php
-require_once "Conexion.class.php";
-require_once "Usuario.class.php";
+require_once "conexion.class.php";
+require_once "usuario.class.php";
 class InsercionesDAO{
     public static function registrarUsuario($nombre, $apellidos, $edad, $email, $contraseña){
         try{
@@ -14,6 +14,7 @@ class InsercionesDAO{
             return false;
         }
     }
+
     
     public static function verificarEmailExistente($email){
         try{

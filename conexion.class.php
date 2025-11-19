@@ -6,7 +6,7 @@ class Conexion
     private $host = 'localhost';
     private $usuario = 'root';
     private $password = 'root';
-    private $basedatos = 'parque_atracciones';
+    private $basedatos = 'actividadGrupal';
     //Constructor privado
     private function __construct()
     {

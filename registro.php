@@ -1,5 +1,5 @@
 <?php 
-require_once "InsercionesDAO.class.php";
+require_once "insercionesDAO.class.php";
 $errores = array();
 $mensaje_exito = '';
 $nombre = $apellidos = $edad = $email = '';
