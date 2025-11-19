@@ -1,0 +1,77 @@
+-- ========================================================
+-- Tabla: usuarios
+-- ========================================================
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(150) NOT NULL,
+    edad INT CHECK (edad >= 0),
+    email VARCHAR(150) UNIQUE NOT NULL,
+    contraseña VARCHAR(200) NOT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ========================================================
+-- Tabla: parque_de_atracciones
+-- ========================================================
+CREATE TABLE parque_atracciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
+    descripcion TEXT
+   	
+);
+
+-- ========================================================
+-- Tabla: zonas_publicas
+-- ========================================================
+CREATE TABLE zonas_publicas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    parque_id INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    FOREIGN KEY (parque_id) REFERENCES parque_atracciones(id)
+);
+
+-- ========================================================
+-- Tabla: atracciones
+-- ========================================================
+CREATE TABLE atracciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    parque_id INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    edad_minima INT,
+    FOREIGN KEY (parque_id) REFERENCES parque_atracciones(id)
+);
+
+-- ========================================================
+-- Tabla: restaurantes
+-- ========================================================
+CREATE TABLE restaurantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    parque_id INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    tipo_cocina VARCHAR(100),
+    descripcion TEXT,
+    FOREIGN KEY (parque_id) REFERENCES parque_atracciones(id)
+);
+
+-- ========================================================
+-- Tabla polimórfica: valoraciones
+-- ========================================================
+CREATE TABLE valoraciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    usuario_id INT NOT NULL,
+
+    -- Campos polimórficos (ahora incluye parque)
+    valorable_id INT NOT NULL,
+    valorable_tipo ENUM('parque', 'zona_publica', 'atraccion', 'restaurante') NOT NULL,
+
+    puntuacion INT NOT NULL CHECK (puntuacion BETWEEN 1 AND 5),
+    comentario TEXT,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
