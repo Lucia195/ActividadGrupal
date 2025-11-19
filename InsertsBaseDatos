@@ -1,0 +1,82 @@
+-- ========================================================
+-- Inserts para tabla: parque_atracciones
+-- ========================================================
+INSERT INTO parque_atracciones (nombre, descripcion) VALUES
+('Parque Diversión Total', 'Un parque lleno de emociones para toda la familia.'),
+('Parque Aventuras Extremas', 'Para los que buscan adrenalina y emociones fuertes.'),
+('Parque Infantil Encantado', 'Ideal para los más pequeños, con zonas temáticas y juegos suaves.');
+
+
+-- ========================================================
+-- Inserts para tabla: zonas_publicas
+-- ========================================================
+INSERT INTO zonas_publicas (parque_id, nombre, descripcion) VALUES
+-- Parque 1
+(1, 'Zona Verde', 'Amplias áreas verdes para descansar y hacer picnic.'),
+(1, 'Plaza Central', 'Lugar de encuentro y espectáculos en vivo.'),
+-- Parque 2
+(2, 'Zona de Agua', 'Fuentes y lagos con juegos acuáticos.'),
+(2, 'Mirador Extremo', 'Punto panorámico con vistas increíbles del parque.'),
+-- Parque 3
+(3, 'Jardín de Fantasía', 'Decorado con figuras de cuentos infantiles.'),
+(3, 'Patio de Juegos', 'Área de juegos seguros para los niños.');
+
+
+-- ========================================================
+-- Inserts para tabla: atracciones
+-- ========================================================
+INSERT INTO atracciones (parque_id, nombre, descripcion, edad_minima) VALUES
+-- Parque 1
+(1, 'Montaña Rusa Giant', 'Una montaña rusa emocionante para toda la familia.', 10),
+(1, 'Carrusel Mágico', 'Clásico carrusel con luces y música.', 3),
+-- Parque 2
+(2, 'Tobogán Extremo', 'Deslízate por toboganes de gran altura.', 12),
+(2, 'Puente Colgante', 'Atrévete a cruzar el puente más alto del parque.', 8),
+-- Parque 3
+(3, 'Trenecito de Cuento', 'Paseo en tren por el parque infantil.', 2),
+(3, 'Casa de los Espejos', 'Diviértete con los reflejos y laberintos de espejos.', 4);
+
+
+-- ========================================================
+-- Inserts para tabla: restaurantes
+-- ========================================================
+INSERT INTO restaurantes (parque_id, nombre, tipo_cocina, descripcion) VALUES
+-- Parque 1
+(1, 'La Parrilla Alegre', 'Comida rápida', 'Burgers, hot dogs y papas fritas.'),
+(1, 'Heladería Dulce Vida', 'Postres', 'Gran variedad de helados y batidos.'),
+-- Parque 2
+(2, 'Sabor Extremo', 'Mexicana', 'Tacos, burritos y platos picantes.'),
+(2, 'Refugio Gourmet', 'Internacional', 'Platos variados de cocina internacional.'),
+-- Parque 3
+(3, 'Cafetería Fantasía', 'Café y repostería', 'Bebidas calientes y pasteles deliciosos.'),
+(3, 'Snack Mágico', 'Snacks', 'Bocadillos y jugos naturales.');
+
+
+-- ========================================================
+-- Inserts para tabla: valoraciones (solo zona_publica, atraccion y restaurante)
+-- ========================================================
+INSERT INTO valoraciones (usuario_id, valorable_id, valorable_tipo, puntuacion, comentario) VALUES
+-- Parque 1
+(1, 1, 'atraccion', 5, 'La montaña rusa es increíble.'),
+(1, 2, 'atraccion', 3, 'El carrusel es bonito, pero corto.'),
+(1, 1, 'restaurante', 4, 'La comida estaba muy buena y rápida.'),
+(1, 2, 'restaurante', 5, 'El helado es delicioso.'),
+(1, 1, 'zona_publica', 5, 'Zona verde perfecta para descansar.'),
+(1, 2, 'zona_publica', 4, 'La plaza central tiene buen ambiente.'),
+
+-- Parque 2
+(1, 3, 'atraccion', 5, 'El tobogán extremo es súper emocionante.'),
+(1, 4, 'atraccion', 4, 'El puente colgante da mucha adrenalina.'),
+(1, 3, 'restaurante', 4, 'Comida mexicana muy sabrosa.'),
+(1, 4, 'restaurante', 5, 'Platos internacionales muy buenos.'),
+(1, 3, 'zona_publica', 5, 'Zona de agua refrescante y divertida.'),
+(1, 4, 'zona_publica', 4, 'El mirador tiene una vista espectacular.'),
+
+-- Parque 3
+(1, 5, 'atraccion', 5, 'El trenecito encantó a los niños.'),
+(1, 6, 'atraccion', 4, 'La casa de los espejos es muy divertida.'),
+(1, 5, 'restaurante', 5, 'Cafetería con pasteles deliciosos.'),
+(1, 6, 'restaurante', 4, 'Snack mágico con buena variedad.'),
+(1, 5, 'zona_publica', 5, 'El jardín de fantasía es hermoso.'),
+(1, 6, 'zona_publica', 4, 'Patio de juegos seguro y divertido.');
+
