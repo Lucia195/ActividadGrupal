@@ -1,36 +1,22 @@
 <?php
-// Incluye tu archivo de conexión a la base de datos aquí si es necesario
-// include 'conexion.php'; 
-
-$errores = array(); // Inicializa el array de errores
+require_once "ConsultasDAO.class.php";
+session_start();
+$errores = '';
 $mensaje_exito = '';
 
-// 1. Procesamiento del formulario
-/* if (isset($_POST['registro'])) {
-    
-    $nombre = trim($_POST['nombre']);
-    $contrasena = $_POST['contrasena'];
-    $contrasena2 = $_POST['contrasena2'];
-    
-    // 2. Validación
-    if (empty($nombre) || empty($contrasena) || empty($contrasena2)) {
-        $errores[] = "Todos los campos son obligatorios.";
+
+if ($_POST['inicio']){
+    $correo=trim($_POST['email']);
+    $contrasena=trim($_POST['contrasena']);
+    $resultado = ConsultasDAO::comprobarContraseña($correo, $contrasena);
+    if (!$resultado){
+        $errores = "La contraseña y el correo no coinciden";
+    }else{
+        //Falta llevar a la pagina de la lista de los parques
+        $_SESSION['correo'] = $correo;//Para que se mantenga la sesión iniciada
     }
 
-    if ($contrasena !== $contrasena2) {
-        $errores[] = "Las contraseñas no coinciden.";
-    }
-    
-    // 3. Registro (Si no hay errores)
-    if (empty($errores)) {
-        
-        // Aquí se ejecutaría la lógica de registro en la base de datos
-        // $pass_hash = password_hash($contrasena, PASSWORD_DEFAULT);
-        // Lógica: INSERT INTO usuarios ...
-        
-        $mensaje_exito = "¡Registro exitoso! (Añade código de base de datos real)";
-    }
-} */
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,31 +30,13 @@ $mensaje_exito = '';
     <div class="contenedor">
         <div class="registro">
             <h3>Inicio de sesión</h3>
-            
-            <?php 
-            if (!empty($errores)) {
-            ?>
-                <div class="mensaje-error">
-                <?php 
-                    foreach ($errores as $error) {
-                        echo "<p style='margin: 0;'>$error</p>";
-                    }
-                ?>
-                </div>
-            <?php 
+            <?php //Se muestra el mensaje si la contraseña o el correo no concuerdan
+            if (!empty($errores)){
+                echo "<div class='mensaje-error'>";
+                echo "<p style='margin: 0;'>$errores</p>";
             }
             ?>
 
-            <?php 
-            if (!empty($mensaje_exito)) {
-            ?>
-                <div class="mensaje-exito">
-                    <p style='margin: 0;'><?php echo $mensaje_exito; ?></p>
-                </div>
-            <?php 
-            }
-            ?>
-            
             <form action="inicio.php" method="POST">
                 <div class="campos">
                     <input type="email" id="email" name="email" placeholder="Email" required>
