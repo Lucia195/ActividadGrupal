@@ -8,12 +8,14 @@ $mensaje_exito = '';
 if ($_POST['inicio']){
     $correo=trim($_POST['email']);
     $contrasena=trim($_POST['contrasena']);
-    $resultado = ConsultasDAO::comprobarContraseña($correo, $contrasena);
+    $resultado = ConsultasDAO::inicioSesion($correo, $contrasena);
     if (!$resultado){
-        $errores = "La contraseña y el correo no coinciden";
+        $errores = "La contraseña y el correo son incorrectos";
     }else{
-        //Falta llevar a la pagina de la lista de los parques
+        //Falta llevar a la pagina MostrarParques.class.php
+        //Falta comprobar que funciona
         $_SESSION['correo'] = $correo;//Para que se mantenga la sesión iniciada
+
     }
 
 }
