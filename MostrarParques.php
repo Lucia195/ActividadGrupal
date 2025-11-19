@@ -16,8 +16,10 @@ require_once "ParquesDAO.class.php";
 </head>
 
 <body>
-    <h1>Lista de parques de atracciones</h1>
-
+    <div class="cabecera-principal">
+        <h1>Lista de parques de atracciones</h1>
+        <a href="CerrarSesion.php" class="btn-cerrar-sesion">Cerrar Sesión</a>
+    </div>
     <div class="contenedor-parques">
 
         <?php

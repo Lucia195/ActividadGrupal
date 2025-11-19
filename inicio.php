@@ -5,17 +5,18 @@ $errores = '';
 $mensaje_exito = '';
 
 
-if ($_POST['inicio']){
+if (isset($_POST['inicio'])){
     $correo=trim($_POST['email']);
     $contrasena=trim($_POST['contrasena']);
     $resultado = ConsultasDAO::inicioSesion($correo, $contrasena);
     if (!$resultado){
         $errores = "La contraseña y el correo son incorrectos";
     }else{
-        //Falta llevar a la pagina MostrarParques.class.php
-        //Falta comprobar que funciona
-        $_SESSION['correo'] = $correo;//Para que se mantenga la sesión iniciada
-
+        $_SESSION['usuario_id'] = $resultado->getIdUsuario();
+        $_SESSION['correo'] = $resultado->getCorreo();
+        
+        header("Location: MostrarParques.php");
+        exit();
     }
 
 }

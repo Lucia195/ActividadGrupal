@@ -25,6 +25,7 @@ $nombre = $apellidos = $edad = $email = '';
             if ($resultado) {
                 $mensaje_exito = "¡El registro se ha completado con éxito!";
                 $nombre = $apellidos = $edad = $email = ''; 
+                header("Location: inicio.php");
             } else {
                 $errores[] = "Fallo en el registro. Hubo un error desconocido en la base de datos.";
             }
