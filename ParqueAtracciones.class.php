@@ -18,6 +18,14 @@ class ParqueAtracciones{
 
 	public function setNombre(string $nombre): void {$this->nombre = $nombre;}
 
+
+
+	public function getDescripcion(): string {return $this->descripcion;}
+
+	public function setDescripcion(string $descripcion): void {$this->descripcion = $descripcion;}
+
+	
+
 	
 	
 }

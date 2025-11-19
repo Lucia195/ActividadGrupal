@@ -24,6 +24,7 @@ class ParquesDAO
             return $parques;
             
         } catch (PDOException $e) {
+            echo "Error de Base de Datos: " . $e->getMessage(); // MUESTRA EL ERROR REAL
             return false;
         }
     }

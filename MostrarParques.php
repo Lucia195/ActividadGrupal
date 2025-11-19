@@ -4,24 +4,57 @@ require_once "ParquesDAO.class.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Atracciones del Parque</title>
+    
+    <link rel="stylesheet" href="css/estilosMostrar.css">
+    
 </head>
 
 <body>
+    <h1>Lista de parques de atracciones</h1>
 
-    <?php
-    $lista = ParquesDAO::getParqueAtracciones();
+    <div class="contenedor-parques">
 
-    foreach ($lista as $p) {
-        echo $p->getNombre() . "<br>";
-    }
-
-    ?>
+        <?php
+        $lista = ParquesDAO::getParqueAtracciones();
+        foreach ($lista as $p) {
+            $id = $p->getId();
+            $nombre = $p->getNombre();
+            $descripcion = $p->getDescripcion();
+            
+            echo '
+            <div class="parque">
+                
+                <div class="ccontenido">
+                    <h3>' . htmlspecialchars($nombre) . '</h3>
+                    <p>' . htmlspecialchars($descripcion) . '</p>
+                    
+                    <form action="" method="POST">
+                        <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
+                        <input type="hidden" name="tipo_valoracion" value="atraccion">
+                        <button type="submit" name="valorarAtracciones" id="valorarAtracciones" class="btn-valoracion">Valorar atracciones</button>
+                    </form>
+                    <form action="" method="POST">
+                        <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
+                        <input type="hidden" name="tipo_valoracion" value="atracciones">
+                        <button type="submit" name="valorarRestaurantes" id="valorarRestaurantes" class="btn-valoracion">Valorar restaurantes</button>
+                    </form>
+                    <form action="" method="POST">
+                        <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
+                        <input type="hidden" name="tipo_valoracion" value="atracciones">
+                        <button type="submit" name="valorarZonasPublicas" id="valorarZonasPublicas" class="btn-valoracion">Valorar zonas publicas</button>
+                    </form>
+                </div>
+            </div>
+            ';
+            }
+        ?>
+    </div>
 
 </body>
 
