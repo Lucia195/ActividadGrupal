@@ -28,14 +28,14 @@ require_once "ParquesDAO.class.php";
             $id = $p->getId();
             $nombre = $p->getNombre();
             $descripcion = $p->getDescripcion();
-            
+            $imagen = $p->getImagen();
             echo '
             <div class="parque">
                 
-                <div class="ccontenido">
+                <div class="contenido">
                     <h3>' . htmlspecialchars($nombre) . '</h3>
                     <p>' . htmlspecialchars($descripcion) . '</p>
-                    
+                    <div><img src="' . $imagen . '" alt=""></div>
                     <form action="" method="POST">
                         <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
                         <input type="hidden" name="tipo_valoracion" value="atraccion">

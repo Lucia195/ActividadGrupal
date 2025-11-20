@@ -17,14 +17,14 @@ class ParquesDAO
                 $parques[] = new ParqueAtracciones(
                     $fila['id'],
                     $fila['nombre'],
-                    $fila['descripcion']
+                    $fila['descripcion'],
+                    $fila['imagen']
                 );
             }
 
             return $parques;
             
         } catch (PDOException $e) {
-            echo "Error de Base de Datos: " . $e->getMessage(); // MUESTRA EL ERROR REAL
             return false;
         }
     }
@@ -43,7 +43,8 @@ class ParquesDAO
                 $parques[] = new ParqueAtracciones(
                     $fila['id'],
                     $fila['nombre'],
-                    $fila['descripcion']
+                    $fila['descripcion'],
+                    $fila['imagen']
                 );
             }
 
@@ -69,7 +70,8 @@ class ParquesDAO
                 $parques[] = new ParqueAtracciones(
                     $fila['id'],
                     $fila['nombre'],
-                    $fila['descripcion']
+                    $fila['descripcion'],
+                    $fila['imagen']
                 );
             }
 
@@ -95,7 +97,8 @@ class ParquesDAO
                 $parques[] = new ParqueAtracciones(
                     $fila['id'],
                     $fila['nombre'],
-                    $fila['descripcion']
+                    $fila['descripcion'],
+                    $fila['imagen']
                 );
             }
 
