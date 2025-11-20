@@ -15,7 +15,7 @@ if (isset($_POST['inicio'])){
         //Guardar el usuario directamente sin la contraseña usando set
         $_SESSION['usuario'] = $resultado;
         //Arreglar la sesión
-        //unset();
+        unset($_SESSION['usuario']->contrasena);
         header("Location: MostrarParques.php");
         exit();
     }
@@ -30,7 +30,16 @@ if (isset($_POST['inicio'])){
     <link rel="stylesheet" href="css/inicio.css">
 </head>
 <body>
-
+    
+    <header class="header-registro">
+        <div class="enlace-registro-contenedor">
+            <p>Si no tienes cuenta:</p>
+            <form action="registro.php" method="post">
+                <button type="submit" class="boton-registro-flotante">Registrarse</button>
+            </form>
+        </div>
+    </header>
+    
     <div class="contenedor">
         <div class="registro">
             <h3>Inicio de sesión</h3>
@@ -54,11 +63,6 @@ if (isset($_POST['inicio'])){
             <p class="footer">© I.E.S. Monte Naranco</p>
         </div>
     </div>
-    <div class="pie-login">
-        <p>Si no tienes cuenta:</p>
-        <form action="registro.php" method="post">
-            <button type="submit" class="boton-registro">Registrarse</button>
-        </form>
-    </div>
-</body>
+    
+    </body>
 </html>

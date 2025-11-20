@@ -26,7 +26,7 @@ class Usuario{
 	public function setEdad(int $edad): void {$this->edad = $edad;}
 
 	public function setCorreo(string $correo): void {$this->correo = $correo;}
-
+	
 	
 }
 ?>

@@ -29,81 +29,144 @@ class ParquesDAO
         }
     }
 
-    public static function getAtraccionesPorId(int $parqueId)
+     public static function getAtracciones()
     {
         try {
             $conexion = Conexion::getInstancia()->getConexion();
-            $consulta = "SELECT * FROM parque_atracciones";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
 
-            $parques = [];
+            $consulta = "SELECT
+                    a.*,
+                    a.id AS atraccionId,
+                    a.nombre AS atraccionNombre,
+                    a.descripcion AS atraccionDescripcion,
+                    pa.id AS parqueId,
+                    pa.nombre AS parqueNombre,
+                    pa.descripcion AS parqueDescripcion,
+                    pa.parque_imagen AS parqueImagen
+                FROM atracciones a
+                JOIN parque_atracciones pa ON a.parque_id = pa.id";
+
+            $resultado = $conexion->prepare($consulta);
+             $resultado->execute();
+
+            $atracciones = [];
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                $parques[] = new ParqueAtracciones(
-                    $fila['id'],
-                    $fila['nombre'],
-                    $fila['descripcion'],
-                    $fila['parque_imagen']
+                $parque = new ParqueAtracciones(
+                    $fila['parqueId'],
+                    $fila['parqueNombre'],
+                    $fila['parqueDescripcion'],
+                    $fila['parqueImagen']
                 );
+
+                $atraccion = new Atraccion(
+                    $fila['atraccionId'],
+                    $parque,
+                    $fila['atraccionNombre'],
+                    $fila['atraccionDescripcion'],
+                    $fila['edad_minima'],
+                    $fila['atraccion_imagen']
+                );
+
+                $atracciones[] = $atraccion;
             }
 
-            return $parques;
-            
+            return $atracciones;
         } catch (PDOException $e) {
             return false;
         }
     }
 
 
-     public static function getRestaurantesPorId(int $parqueId)
+    public static function getRestaurantes()
     {
         try {
             $conexion = Conexion::getInstancia()->getConexion();
-            $consulta = "SELECT * FROM parque_atracciones";
+            $consulta = "SELECT
+                        r.id AS restauranteId,
+                        r.nombre AS restauranteNombre,
+                        r.descripcion as restauranteDescripcion,
+                        r.tipo_cocina,
+                        r.restaurante_imagen, 
+                        pa.id,
+                        pa.nombre ,
+                        pa.descripcion,
+                        pa.parque_imagen
+                    FROM restaurantes r 
+                    JOIN parque_atracciones pa ON r.parque_id = pa.id;
+";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
-            $parques = [];
+            $restaurantes = [];
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                $parques[] = new ParqueAtracciones(
+               $parque = new ParqueAtracciones(
                     $fila['id'],
                     $fila['nombre'],
                     $fila['descripcion'],
                     $fila['parque_imagen']
                 );
+
+                 $restaurante = new Restaurante(
+                    $fila['restauranteId'],
+                    $parque,
+                    $fila['restauranteNombre'],
+                    $fila['restauranteDescripcion'],
+                    $fila['tipo_cocina'],
+                    $fila['restaurante_imagen']
+                );
+
+                $restaurantes[] = $restaurante;
             }
 
-            return $parques;
-            
+            return $restaurantes;
         } catch (PDOException $e) {
             return false;
         }
     }
 
-
-     public static function getZonasPorId(int $id)
+    public static function getZonas()
     {
         try {
             $conexion = Conexion::getInstancia()->getConexion();
-            $consulta = "SELECT * FROM parque_atracciones";
+            $consulta = "SELECT
+                        zp.id AS zonasId,
+                        zp.nombre AS rzonasNombre,
+                        zp.descripcion as zonasDescripcion,
+                        zp.zona_publica_imagen,
+                        pa.id,
+                        pa.nombre ,
+                        pa.descripcion,
+                        pa.parque_imagen
+                    FROM zonas_publicas zp 
+                    JOIN parque_atracciones pa ON zp.parque_id = pa.id;";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
-            $parques = [];
+            $zonas[] = [];
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
-                $parques[] = new ParqueAtracciones(
+                $parque = new ParqueAtracciones(
                     $fila['id'],
                     $fila['nombre'],
                     $fila['descripcion'],
                     $fila['parque_imagen']
                 );
+
+                $zona = new ZonaPublica(
+                    $fila['zonasId'],
+                    $parque,
+                    $fila['zonasNombre'],
+                    $fila['rzonasDescripcion'],
+                    $fila['zona_publica_imagen']
+                    
+                );
+
+                $zonas[] = $zona;
             }
 
-            return $parques;
-            
+            return $zonas;
         } catch (PDOException $e) {
             return false;
         }

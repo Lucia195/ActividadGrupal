@@ -7,15 +7,20 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+    position: relative; 
 }
 
 .contenedor {
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
+    align-items: center; 
     padding: 2.5rem 1.25rem;
-    min-height: calc(100vh - 9.375rem);
-    background-color: white;
+    min-height: auto;
+    background-color: transparent; 
+    margin-top: 2rem; 
+    margin-bottom: 2rem;
 }
 
 .registro {
@@ -48,7 +53,7 @@ body {
     text-align: left;
 }
 
-#inicio{
+#inicio {
     width: 100%;
     padding: 0.75rem;
     background-color: #007bff;
@@ -66,9 +71,10 @@ body {
 
 .footer {
     text-align: center;
-    padding: 1.25rem;
+    padding: 1.25rem 0 0; 
     font-size: 0.9em;
     color: #777;
+    margin-top: 1rem;
 }
 
 .mensaje-error {
@@ -80,34 +86,57 @@ body {
     border-radius: 0.25rem;
 }
 
-.pie-login {
-    width: 90%; 
-    max-width: 18.75rem;
-    margin: 0.625rem auto 0; 
-    justify-content: center;
-    text-align: center; 
+
+.header-registro {
+    position: fixed; 
+    top: 0;
+    left: 0; 
+    width: 100%;
+    padding: 1rem 1.25rem;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center; 
 }
 
-.pie-login p {
-    font-size: 0.875rem;
-    margin-bottom: 0.3125rem;
+.enlace-registro-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0; 
+    background-color: transparent;
 }
 
+.enlace-registro-contenedor p {
+    font-size: 1em; 
+    margin: 0; 
+    color: #333;
+    font-weight: normal;
+}
 
-.boton-registro {
+.enlace-registro-contenedor form {
+    margin: 0;
+}
+
+.boton-registro-flotante {
     background-color: #007bff;
     color: white; 
     border: none;
-    padding: 0.625rem 1.25rem;
-    border-radius: 0.3125rem;
-    cursor: pointer;
+    padding: 0.5rem 1.25rem; 
+    
+    border-radius: 0.25rem;
     font-size: 1em; 
-    font-weight: bold;
+    font-weight: bold; 
+    cursor: pointer;
     transition: background-color 0.3s ease;
-    min-width: 9rem; 
+    min-width: auto; 
     display: inline-block; 
 }
 
-.boton-registro:hover {
-    background-color: #0056b3;
+.boton-registro-flotante:hover {
+    background-color: #0056b3; 
+}
+
+.pie-login, .boton-registro {
+    display: none;
 }
