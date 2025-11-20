@@ -12,9 +12,9 @@ if (isset($_POST['inicio'])){
     if (!$resultado){
         $errores = "La contraseña y el correo son incorrectos";
     }else{
-        $_SESSION['usuario_id'] = $resultado->getIdUsuario();
-        $_SESSION['correo'] = $resultado->getCorreo();
-        
+        //Guardar el usuario directamente sin la contraseña usando set
+        $_SESSION['usuario'] = $resultado;
+        session_unset('contraseña');//Revisar esto, no estoy segura de que sea así
         header("Location: MostrarParques.php");
         exit();
     }
@@ -26,7 +26,7 @@ if (isset($_POST['inicio'])){
 <head>
     <meta charset="UTF-8">
     <title>Inicio de sesión</title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/inicio.css">
 </head>
 <body>
 
@@ -36,7 +36,7 @@ if (isset($_POST['inicio'])){
             <?php //Se muestra el mensaje si la contraseña o el correo no concuerdan
             if (!empty($errores)){
                 echo "<div class='mensaje-error'>";
-                echo "<p style='margin: 0;'>$errores</p>";
+                echo "<p>$errores</p></div>";
             }
             ?>
 

@@ -18,7 +18,7 @@ class ParquesDAO
                     $fila['id'],
                     $fila['nombre'],
                     $fila['descripcion'],
-                    $fila['imagen']
+                    $fila['parque_imagen']
                 );
             }
 
@@ -44,7 +44,7 @@ class ParquesDAO
                     $fila['id'],
                     $fila['nombre'],
                     $fila['descripcion'],
-                    $fila['imagen']
+                    $fila['parque_imagen']
                 );
             }
 
@@ -71,7 +71,7 @@ class ParquesDAO
                     $fila['id'],
                     $fila['nombre'],
                     $fila['descripcion'],
-                    $fila['imagen']
+                    $fila['parque_imagen']
                 );
             }
 
@@ -98,7 +98,7 @@ class ParquesDAO
                     $fila['id'],
                     $fila['nombre'],
                     $fila['descripcion'],
-                    $fila['imagen']
+                    $fila['parque_imagen']
                 );
             }
 

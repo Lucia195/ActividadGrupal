@@ -4,6 +4,9 @@ body {
     padding: 0;
     background-color: #f4f4f4;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .contenedor {
@@ -45,22 +48,6 @@ body {
     text-align: left;
 }
 
-#registro{
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 0.25rem;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#registro:hover {
-    background-color: #0056b3;
-}
-
 #inicio{
     width: 100%;
     padding: 0.75rem;
@@ -92,16 +79,6 @@ body {
     padding: 0.625rem;
     border-radius: 0.25rem;
 }
-
-.mensaje-exito {
-    color: #28a745;
-    margin-bottom: 0.9375rem;
-    border: 0.0625rem solid #c3e6cb;
-    background-color: #d4edda;
-    padding: 0.625rem;
-    border-radius: 0.25rem;
-}
-
 
 .pie-login {
     width: 90%; 
