@@ -7,14 +7,15 @@ class Atraccion
     private string $nombre;
     private string $descripcion;
     private int $edadMinima;
+    private string $imagen;
 
-   public function __construct(int $id, ParqueAtracciones $parque, string $nombre, string $descripcion, int $edadMinima) {
+   public function __construct(int $id, ParqueAtracciones $parque, string $nombre, string $descripcion, int $edadMinima, string $imagen) {
     	$this->id = $id;
     	$this->parque = $parque;
     	$this->nombre = $nombre;
     	$this->descripcion = $descripcion;
     	$this->edadMinima = $edadMinima;
-    
+        $this->imagen=$imagen;
     }
 
     public function getId(): int
@@ -67,7 +68,11 @@ class Atraccion
         $this->edadMinima = $edadMinima;
     }
 
-    
+	public function getImagen(): string {return $this->imagen;}
+
+	public function setImagen(string $imagen): void {$this->imagen = $imagen;}
+
+	
 }
 
 ?>

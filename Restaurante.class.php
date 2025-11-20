@@ -7,14 +7,15 @@ class Restaurante {
     private string $nombre;
     private string $tipoCocina;
     private string $descripcion;
+    private string $imagen;
 
-    public function __construct(int $id, ParqueAtracciones $parque, string $nombre, string $tipoCocina, string $descripcion) {
+    public function __construct(int $id, ParqueAtracciones $parque, string $nombre, string $tipoCocina, string $descripcion, string $imagen) {
     	$this->id = $id;
     	$this->parque = $parque;
     	$this->nombre = $nombre;
     	$this->tipoCocina = $tipoCocina;
     	$this->descripcion = $descripcion;
-    
+        $this->imagen=$imagen;
     }
 
     public function getId(): int {
@@ -57,7 +58,12 @@ class Restaurante {
         $this->descripcion = $descripcion;
     }
 
-   
+	public function getImagen(): string {return $this->imagen;}
+
+	public function setImagen(string $imagen): void {$this->imagen = $imagen;}
+
+	
+	
 }
 
 ?>

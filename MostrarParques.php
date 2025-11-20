@@ -41,14 +41,14 @@ require_once "ParquesDAO.class.php";
                         <input type="hidden" name="tipo_valoracion" value="atraccion">
                         <button type="submit" name="valorarAtracciones" id="valorarAtracciones" class="btn-valoracion">Valorar atracciones</button>
                     </form>
-                    <form action="" method="POST">
+                    <form action="PaginaValorarRestaurante.php" method="POST">
                         <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
-                        <input type="hidden" name="tipo_valoracion" value="atracciones">
+                        <input type="hidden" name="tipo_valoracion" value="restaurante">
                         <button type="submit" name="valorarRestaurantes" id="valorarRestaurantes" class="btn-valoracion">Valorar restaurantes</button>
                     </form>
                     <form action="" method="POST">
                         <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
-                        <input type="hidden" name="tipo_valoracion" value="atracciones">
+                        <input type="hidden" name="tipo_valoracion" value="zona_publica">
                         <button type="submit" name="valorarZonasPublicas" id="valorarZonasPublicas" class="btn-valoracion">Valorar zonas publicas</button>
                     </form>
                 </div>

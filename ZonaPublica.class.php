@@ -5,13 +5,14 @@ class ZonaPublica {
     private ParqueAtracciones $parque;      
     private string $nombre;
     private string $descripcion;
+    private string $imagen;
 
-    public function __construct(int $id, ParqueAtracciones $parque, string $nombre, string $descripcion) {
+    public function __construct(int $id, ParqueAtracciones $parque, string $nombre, string $descripcion, string $imagen) {
     	$this->id = $id;
     	$this->parque = $parque;
     	$this->nombre = $nombre;
     	$this->descripcion = $descripcion;
-    
+        $this->imagen=$imagen;
     }
 
     public function getId(): int {
@@ -46,6 +47,11 @@ class ZonaPublica {
         $this->descripcion = $descripcion;
     }
 
-    
+	public function getImagen(): string {return $this->imagen;}
+
+	public function setImagen(string $imagen): void {$this->imagen = $imagen;}
+
+	
+	
 }
 ?>
