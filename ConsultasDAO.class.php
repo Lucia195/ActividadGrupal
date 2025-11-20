@@ -21,5 +21,50 @@ class ConsultasDAO{
             return null;
         }
     }
+    public static function getRestaurantesPorParque(int $parqueId) {
+        try {
+            $conexion = Conexion::getInstancia()->getConexion();
+            $consulta = "SELECT
+                        r.id AS restauranteId,
+                        r.nombre AS restauranteNombre,
+                        r.descripcion AS restauranteDescripcion,
+                        r.tipo_cocina,
+                        r.restaurante_imagen, 
+                        pa.id,
+                        pa.nombre ,
+                        pa.descripcion,
+                        pa.parque_imagen
+                    FROM restaurantes r 
+                    JOIN parque_atracciones pa ON r.parque_id = pa.id
+                    WHERE r.parque_id = ?;";
+                    
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute([$parqueId]);
+            $restaurantes = [];
+            while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+               $parque = new ParqueAtracciones(
+                    $fila['id'],
+                    $fila['nombre'],
+                    $fila['descripcion'],
+                    $fila['parque_imagen']
+                );
+
+                 $restaurante = new Restaurante(
+                    $fila['restauranteId'],
+                    $parque,
+                    $fila['restauranteNombre'],
+                    $fila['restauranteDescripcion'],
+                    $fila['tipo_cocina'],
+                    $fila['restaurante_imagen']
+                );
+
+                $restaurantes[] = $restaurante;
+            }
+
+            return $restaurantes;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }
 ?>

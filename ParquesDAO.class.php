@@ -35,10 +35,10 @@ class ParquesDAO
             $conexion = Conexion::getInstancia()->getConexion();
 
             $consulta = "SELECT
-                    a.*,
                     a.id AS atraccionId,
                     a.nombre AS atraccionNombre,
                     a.descripcion AS atraccionDescripcion,
+                    a.atraccion_imagen AS atraccionImagen,
                     pa.id AS parqueId,
                     pa.nombre AS parqueNombre,
                     pa.descripcion AS parqueDescripcion,
@@ -65,7 +65,7 @@ class ParquesDAO
                     $fila['atraccionNombre'],
                     $fila['atraccionDescripcion'],
                     $fila['edad_minima'],
-                    $fila['atraccion_imagen']
+                    $fila['atraccionImagen']
                 );
 
                 $atracciones[] = $atraccion;
@@ -93,8 +93,7 @@ class ParquesDAO
                         pa.descripcion,
                         pa.parque_imagen
                     FROM restaurantes r 
-                    JOIN parque_atracciones pa ON r.parque_id = pa.id;
-";
+                    JOIN parque_atracciones pa ON r.parque_id = pa.id;";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
 
@@ -169,6 +168,28 @@ class ParquesDAO
             return $zonas;
         } catch (PDOException $e) {
             return false;
+        }
+    }
+    public static function getParquePorId(int $id): ?ParqueAtracciones{
+        try {
+            $conexion = Conexion::getInstancia()->getConexion();
+            $consulta = "SELECT id, nombre, descripcion, imagen FROM parque_atracciones WHERE id = ?"; 
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute([$id]);
+
+            $fila = $resultado->fetch(PDO::FETCH_ASSOC);
+            if ($fila) {
+                return new ParqueAtracciones(
+                    $fila['id'],
+                    $fila['nombre'],
+                    $fila['descripcion'],
+                    $fila['imagen']
+                );
+            }
+
+            return null; 
+        } catch (PDOException $e) {
+            return null;
         }
     }
 }
