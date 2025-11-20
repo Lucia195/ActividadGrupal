@@ -9,12 +9,13 @@ if (isset($_POST['inicio'])){
     $correo=trim($_POST['email']);
     $contrasena=trim($_POST['contrasena']);
     $resultado = ConsultasDAO::inicioSesion($correo, $contrasena);
-    if (!$resultado){
+    if (!($resultado instanceof("Usuario"))){
         $errores = "La contraseña y el correo son incorrectos";
     }else{
         //Guardar el usuario directamente sin la contraseña usando set
         $_SESSION['usuario'] = $resultado;
-        session_unset('contraseña');//Revisar esto, no estoy segura de que sea así
+        //Arreglar la sesión
+        //unset();
         header("Location: MostrarParques.php");
         exit();
     }
