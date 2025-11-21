@@ -13,7 +13,7 @@ class ConsultasDAO{
             $fila = $statement->fetch(PDO::FETCH_ASSOC);
 
             if ($fila) {
-                return new Usuario($fila['id'], $fila['nombre'], $fila['apellidos'], $fila['edad'], $fila['email'], $fila['contraseña']);
+                return new Usuario($fila['id'], $fila['nombre'], $fila['apellidos'], $fila['edad'], $fila['email'], null);
             } else {
                 return null;
             }
