@@ -3,11 +3,11 @@ require_once "ParquesDAO.class.php";
 require_once "ConsultasDAO.class.php";
 require_once "Restaurante.class.php";
 require_once "ParqueAtracciones.class.php";
+require_once "InsercionesDAO.class.php";
 session_start();
 
 //Recuperamos el id y el tipo de manera segura
 $parque_id = filter_input(INPUT_POST, 'parque_id', FILTER_VALIDATE_INT);
-$tipo_valoracion = filter_input(INPUT_POST, 'tipo_valoracion', FILTER_SANITIZE_SPECIAL_CHARS);
 $parque_nombre = "Parque Desconocido";
 $parque_obj = ParquesDAO::getParquePorId($parque_id);
 if ($parque_obj && $parque_obj->getNombre()) {
@@ -18,9 +18,11 @@ if ($parque_obj && $parque_obj->getNombre()) {
 $restaurantes = ConsultasDAO::getRestaurantesPorParque($parque_id); 
 $mensaje_exito = '';
 $errores = [];
+
 //Aquí tendría que llamar al método para insertar la valoración de restaurante
 if (isset($_POST['valoracion_restaurante'])) {
-
+    //Esto no está funcionando
+    $exito = InsercionesDAO::valoracion($_SESSION['usuario']->id, $_POST['restaurante_id'], "restaurante", $_POST['puntuacion'], $_POST['comentario']);
 }
 
 $atracciones = ParquesDAO::getAtracciones($parque_id);
@@ -40,6 +42,7 @@ $zonas = ParquesDAO::getZonas($parque_id);
 <body>
     <div class="cabecera-principal">
         <a href="CerrarSesion.php" class="btn-cerrar-sesion">Cerrar Sesión</a>
+        <a href="MostrarParques.php">Volver atrás</a>
     </div>
 
     <!--Formulario para valorar los restaurantes-->

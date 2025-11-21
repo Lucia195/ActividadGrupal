@@ -38,7 +38,6 @@ require_once "ParquesDAO.class.php";
                     <div><img src="' . $imagen . '" alt=""></div>
                     <form action="PaginaValorar.php" method="POST">
                         <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
-                        <input type="hidden" name="tipo_valoracion" value="restaurante">
                         <button type="submit" name="valorar" id="valorar" class="btn-valoracion">Valorar</button>
                     </form>
                 </div>
