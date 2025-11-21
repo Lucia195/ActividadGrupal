@@ -1,6 +1,8 @@
 <?php
 require_once "Conexion.class.php";
 require_once "ParqueAtracciones.class.php";
+require_once "Atraccion.class.php";
+require_once "ZonaPublica.class.php";
 class ParquesDAO
 {
     public static function getParqueAtracciones()
@@ -29,7 +31,7 @@ class ParquesDAO
         }
     }
 
-     public static function getAtracciones()
+     public static function getAtracciones($idParque)
     {
         try {
             $conexion = Conexion::getInstancia()->getConexion();
@@ -38,16 +40,18 @@ class ParquesDAO
                     a.id AS atraccionId,
                     a.nombre AS atraccionNombre,
                     a.descripcion AS atraccionDescripcion,
+                    a.edad_minima AS edadMinima,
                     a.atraccion_imagen AS atraccionImagen,
                     pa.id AS parqueId,
                     pa.nombre AS parqueNombre,
                     pa.descripcion AS parqueDescripcion,
                     pa.parque_imagen AS parqueImagen
                 FROM atracciones a
-                JOIN parque_atracciones pa ON a.parque_id = pa.id";
+                JOIN parque_atracciones pa ON a.parque_id = pa.id
+                WHERE a.parque_id=?";
 
             $resultado = $conexion->prepare($consulta);
-             $resultado->execute();
+            $resultado->execute([$idParque]);
 
             $atracciones = [];
 
@@ -64,7 +68,7 @@ class ParquesDAO
                     $parque,
                     $fila['atraccionNombre'],
                     $fila['atraccionDescripcion'],
-                    $fila['edad_minima'],
+                    $fila['edadMinima'],
                     $fila['atraccionImagen']
                 );
 
@@ -125,27 +129,31 @@ class ParquesDAO
         }
     }
 
-    public static function getZonas()
+    public static function getZonas($idParque)
     {
         try {
             $conexion = Conexion::getInstancia()->getConexion();
-            $consulta = "SELECT
-                        zp.id AS zonasId,
-                        zp.nombre AS rzonasNombre,
-                        zp.descripcion as zonasDescripcion,
-                        zp.zona_publica_imagen,
-                        pa.id,
-                        pa.nombre ,
-                        pa.descripcion,
-                        pa.parque_imagen
-                    FROM zonas_publicas zp 
-                    JOIN parque_atracciones pa ON zp.parque_id = pa.id;";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
 
-            $zonas[] = [];
+            $consulta = "SELECT
+                            zp.id AS zonasId,
+                            zp.nombre AS zonasNombre,
+                            zp.descripcion as zonasDescripcion,
+                            zp.zona_publica_imagen,
+                            pa.id,
+                            pa.nombre,
+                            pa.descripcion,
+                            pa.parque_imagen
+                        FROM zonas_publicas zp 
+                        JOIN parque_atracciones pa ON zp.parque_id = pa.id
+                        WHERE zp.parque_id = ?";
+
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute([$idParque]);
+
+            $zonas = [];
 
             while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+
                 $parque = new ParqueAtracciones(
                     $fila['id'],
                     $fila['nombre'],
@@ -157,15 +165,15 @@ class ParquesDAO
                     $fila['zonasId'],
                     $parque,
                     $fila['zonasNombre'],
-                    $fila['rzonasDescripcion'],
+                    $fila['zonasDescripcion'],
                     $fila['zona_publica_imagen']
-                    
                 );
 
                 $zonas[] = $zona;
             }
 
             return $zonas;
+
         } catch (PDOException $e) {
             return false;
         }

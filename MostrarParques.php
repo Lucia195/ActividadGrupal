@@ -36,20 +36,10 @@ require_once "ParquesDAO.class.php";
                     <h3>' . htmlspecialchars($nombre) . '</h3>
                     <p>' . htmlspecialchars($descripcion) . '</p>
                     <div><img src="' . $imagen . '" alt=""></div>
-                    <form action="" method="POST">
-                        <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
-                        <input type="hidden" name="tipo_valoracion" value="atraccion">
-                        <button type="submit" name="valorarAtracciones" id="valorarAtracciones" class="btn-valoracion">Valorar atracciones</button>
-                    </form>
-                    <form action="PaginaValorarRestaurante.php" method="POST">
+                    <form action="PaginaValorar.php" method="POST">
                         <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
                         <input type="hidden" name="tipo_valoracion" value="restaurante">
-                        <button type="submit" name="valorarRestaurantes" id="valorarRestaurantes" class="btn-valoracion">Valorar restaurantes</button>
-                    </form>
-                    <form action="" method="POST">
-                        <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
-                        <input type="hidden" name="tipo_valoracion" value="zona_publica">
-                        <button type="submit" name="valorarZonasPublicas" id="valorarZonasPublicas" class="btn-valoracion">Valorar zonas publicas</button>
+                        <button type="submit" name="valorar" id="valorar" class="btn-valoracion">Valorar</button>
                     </form>
                 </div>
             </div>

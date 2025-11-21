@@ -27,5 +27,17 @@ class InsercionesDAO{
             return false; 
         }
     }
+
+    public static function valoracionRestaurante($usuario_id, $tipo, $puntuacion, $comentario){
+        try{
+            $conexion = Conexion::getInstancia()->getConexion();
+            $insercion = "INSERT INTO valoraciones (usuario_id, valorable_id, valorable_tipo, puntuacion,comentario) VALUES (?,?,?,?,?)";
+            $resultado = $conexion->prepare($insercion);
+            $exito = $resultado->execute([$usuario_id, $tipo, $puntuacion, $comentario]);
+            return $exito; 
+        }catch(PDOException){
+            return false;
+        }
+    }
 }
 ?>
