@@ -1,6 +1,9 @@
 <?php
 require_once "Conexion.class.php";
 require_once "Usuario.class.php";
+require_once "ParqueAtracciones.class.php";
+require_once "Restaurante.class.php";
+
 class ConsultasDAO{
     public static function inicioSesion($email, $contrasena) :  ?Usuario{
         try{
@@ -18,9 +21,11 @@ class ConsultasDAO{
                 return null;
             }
         }catch (PDOException $e){
+            error_log("Error en inicioSesion: " . $e->getMessage());
             return null;
         }
     }
+    
     public static function getRestaurantesPorParque(int $parqueId) {
         try {
             $conexion = Conexion::getInstancia()->getConexion();
@@ -63,8 +68,28 @@ class ConsultasDAO{
 
             return $restaurantes;
         } catch (PDOException $e) {
-            return false;
+            error_log("Error en getRestaurantesPorParque: " . $e->getMessage());
+            return []; // Devolver array vacío en caso de error es más seguro que false
+        }
+    }
+
+    public static function yaHaValorado($usuario_id, $elemento_id, $tipo)
+    {
+        try {
+            $conexion = Conexion::getInstancia()->getConexion(); 
+            $consulta = "SELECT COUNT(*) FROM valoraciones 
+                         WHERE usuario_id = ? 
+                         AND valorable_id = ? 
+                         AND valorable_tipo = ?";
+
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute([$usuario_id, $elemento_id, $tipo]); 
+            $count = $resultado->fetchColumn();
+            return $count > 0;
+            
+        } catch (PDOException $e) {
+            error_log("Error al comprobar valoración en ConsultasDAO. Revise la tabla 'valoraciones': " . $e->getMessage());
+            return false; 
         }
     }
 }
-?>

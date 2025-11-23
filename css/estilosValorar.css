@@ -1,168 +1,175 @@
-/* ========================================= */
-/* 0. Configuración Global y Tipografía      */
-/* ========================================= */
-:root {
-    --color-primario: #007bff; /* Azul vibrante para botones y acentos */
-    --color-secundario: #6c757d; /* Gris para textos secundarios */
-    --color-fondo: #f8f9fa; /* Fondo general claro */
-    --color-tarjeta: #ffffff; /* Fondo de formularios/tarjetas */
-    --color-texto: #343a40; /* Color de texto principal */
-    --color-exito: #28a745; /* Verde para éxito */
-    --color-error: #dc3545; /* Rojo para errores */
-    --sombra-suave: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--color-fondo);
-    color: var(--color-texto);
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f4f4f9; 
+    color: #333; 
     margin: 0;
     padding: 0;
-    line-height: 1.6;
+}
+.cabecera-principal { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 20px; 
+    background-color: #3f51b5; 
+    color: white; 
+    margin-bottom: 20px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.cabecera-principal a { 
+    color: white; 
+    text-decoration: none; 
+    padding: 8px 15px; 
+    border-radius: 4px; 
+    background-color: #5c6bc0; 
+    transition: background-color 0.3s, transform 0.1s; 
+}
+.cabecera-principal a:hover { 
+    background-color: #7986cb; 
+    transform: translateY(-1px);
 }
 
-h3 {
+.contenedor-valoracion { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+
+
+.grupo-cards { 
+    margin-bottom: 30px; 
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    background-color: white; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.grupo-cards h2 {
+    color: #3f51b5;
+    border-bottom: 2px solid #3f51b5;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+.card-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px; 
+}
+
+.card { 
+    display: flex;
+    flex-direction: column;
+    min-height: 400px; 
+    
+    border: 1px solid #eee; 
+    padding: 15px; 
+    border-radius: 6px; 
+    background-color: #fcfcfc; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.card h4 { 
+    margin-top: 0; 
+    border-bottom: 2px solid #3f51b5; 
+    padding-bottom: 5px; 
+    color: #3f51b5; 
     text-align: center;
-    color: var(--color-primario);
-    margin-bottom: 25px;
 }
 
-/* ========================================= */
-/* 1. Cabecera y Navegación                  */
-/* ========================================= */
-.cabecera-principal {
-    display: flex;
-    justify-content: flex-end; /* Mueve los enlaces a la derecha */
-    align-items: center;
-    background-color: var(--color-tarjeta);
-    padding: 15px 30px;
-    border-bottom: 1px solid #e9ecef;
-    box-shadow: var(--sombra-suave);
-}
-
-.cabecera-principal a {
-    text-decoration: none;
-    color: var(--color-primario);
-    padding: 8px 15px;
-    margin-left: 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.cabecera-principal a:hover {
-    background-color: rgba(0, 123, 255, 0.1);
-}
-
-.btn-cerrar-sesion {
-    background-color: var(--color-error);
-    color: white !important;
-}
-
-.btn-cerrar-sesion:hover {
-    background-color: #c82333;
-}
-
-/* ========================================= */
-/* 2. Contenedor de Formularios (Grid)       */
-/* ========================================= */
-.contenedorFormularios {
-    display: grid;
-    /* Divide el contenedor en 3 columnas de igual ancho */
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 30px; /* Espacio entre los formularios */
-    max-width: 1400px;
-    margin: 40px auto; /* Centra el contenedor principal */
-    padding: 0 20px;
-}
-
-/* ========================================= */
-/* 3. Estilos Generales del Formulario       */
-/* ========================================= */
-.contenedorFormularios form {
-    background-color: var(--color-tarjeta);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: var(--sombra-suave);
-    display: flex;
-    flex-direction: column; /* Coloca los elementos uno debajo del otro */
-}
-
-/* Estilo para las etiquetas */
-.contenedorFormularios label {
-    font-weight: bold;
-    color: var(--color-texto);
-    margin-top: 15px;
-    margin-bottom: 5px;
-}
-
-/* Estilo para inputs, selects y textareas */
-.contenedorFormularios input[type="number"],
-.contenedorFormularios select,
-.contenedorFormularios textarea {
+.card .imagen-elemento {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    box-sizing: border-box; /* Incluye padding y border en el ancho total */
-    margin-bottom: 15px;
-    font-size: 16px;
-    transition: border-color 0.3s;
+    height: 150px;
+    margin-bottom: 10px;
+    overflow: hidden; 
+    border-radius: 4px;
+    background-color: #f0f0f0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.contenedorFormularios input[type="number"]:focus,
-.contenedorFormularios select:focus,
-.contenedorFormularios textarea:focus {
-    border-color: var(--color-primario);
-    outline: none;
+.card .imagen-elemento img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
 }
 
-.contenedorFormularios textarea {
-    resize: vertical; /* Permite redimensionar solo verticalmente */
-    min-height: 80px;
+.card label { 
+    display: block; 
+    margin-top: 10px; 
+    font-weight: bold; 
+    color: #555;
 }
 
-/* ========================================= */
-/* 4. Estilos de Botones de Envío            */
-/* ========================================= */
-.contenedorFormularios button[type="submit"] {
-    background-color: var(--color-primario);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+.card select,
+.card textarea { 
+    width: 100%; 
+    padding: 8px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    margin-top: 4px;
+    margin-bottom: 10px;
+}
+.card textarea { 
+    resize: vertical; 
+    flex-grow: 1; 
+    min-height: 80px; 
+}
+
+.submit-section { 
+    text-align: center; 
+    margin-top: 30px; 
+    padding-top: 20px;
+    border-top: 1px dashed #ddd;
+}
+.btn-enviar { 
+    background-color: #4CAF50;
+    color: white; 
+    padding: 15px 30px; 
+    border: none; 
+    border-radius: 6px; 
+    font-size: 1.1em; 
+    cursor: pointer; 
+    transition: background-color 0.3s, opacity 0.3s;
     font-weight: bold;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
+}
+.btn-enviar:hover { background-color: #45a049; }
+.btn-enviar[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
-.contenedorFormularios button[type="submit"]:hover {
-    background-color: #0056b3;
+.mensaje-exito { 
+    color: #155724;
+    background-color: #d4edda; 
+    border: 1px solid #c3e6cb; 
+    padding: 15px; 
+    margin-bottom: 20px; 
+    border-radius: 4px; 
+    text-align: center; 
+    font-weight: bold;
 }
-
-/* ========================================= */
-/* 5. Responsive Design                      */
-/* ========================================= */
-@media (max-width: 1200px) {
-    .contenedorFormularios {
-        /* En pantallas medianas, cambia a 2 columnas */
-        grid-template-columns: repeat(2, 1fr); 
-    }
+.mensaje-error { 
+    color: #721c24;
+    background-color: #f8d7da; 
+    border: 1px solid #f5c6cb; 
+    padding: 15px; 
+    margin-bottom: 20px; 
+    border-radius: 4px; 
+    text-align: left; 
 }
 
 @media (max-width: 768px) {
-    .contenedorFormularios {
-        /* En móviles, vuelve a 1 columna */
-        grid-template-columns: 1fr; 
-    }
-    .cabecera-principal {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
-    }
-    .cabecera-principal a {
-        margin-left: 0;
-        margin-top: 10px;
-    }
+    .card-grid { grid-template-columns: 1fr; }
+    .cabecera-principal { flex-direction: column; }
+    .cabecera-principal div { margin-top: 10px; }
 }
