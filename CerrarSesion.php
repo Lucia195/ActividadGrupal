@@ -4,6 +4,6 @@ session_start();
 session_unset(); 
 //Se destruye la sesion
 session_destroy(); 
-header("Location: inicio.php"); 
+header("Location: index.php"); 
 exit(); 
 ?>
