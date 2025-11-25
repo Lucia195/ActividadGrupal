@@ -11,6 +11,7 @@ class InsercionesDAO{
             
             return $exito;
         }catch(PDOException $e){
+            die("ERROR SQL REAL → " . $e->getMessage());
             return false;
         }
     }
