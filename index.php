@@ -50,7 +50,7 @@ if (isset($_POST['inicio'])){
             }
             ?>
 
-            <form action="inicio.php" method="POST">
+            <form action="index.php" method="POST">
                 <div class="campos">
                     <input type="email" id="email" name="email" placeholder="Email" required>
                 </div>
