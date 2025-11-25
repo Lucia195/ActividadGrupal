@@ -200,5 +200,43 @@ class ParquesDAO
             return null;
         }
     }
+
+    public static function mostrarValoracion(int $id){
+    $consulta = "SELECT p.id AS parque_id, p.nombre AS parque,
+                        AVG(v.puntuacion) AS valoracion_media
+                 FROM parque_atracciones p
+                 LEFT JOIN valoraciones v
+                 ON (
+                     (v.valorable_tipo = 'parque' AND v.valorable_id = p.id) 
+                     OR (v.valorable_tipo = 'zona_publica' AND v.valorable_id IN (
+                         SELECT id FROM zonas_publicas WHERE parque_id = p.id
+                     )) 
+                     OR (v.valorable_tipo = 'atraccion' AND v.valorable_id IN (
+                         SELECT id FROM atracciones WHERE parque_id = p.id
+                     )) 
+                     OR (v.valorable_tipo = 'restaurante' AND v.valorable_id IN (
+                         SELECT id FROM restaurantes WHERE parque_id = p.id
+                     ))
+                 )
+                 WHERE p.id = ?
+                 GROUP BY p.id, p.nombre";
+    try {
+        $conexion = Conexion::getInstancia()->getConexion();
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute([$id]);
+
+        $fila = $resultado->fetch(PDO::FETCH_ASSOC);
+
+        if ($fila && $fila['valoracion_media'] !== null) {
+            // Redondeamos la valoración a 2 decimales
+            return round(floatval($fila['valoracion_media']), 2);
+        } else {
+            return 0; // Si no hay valoraciones, devolver 0
+        }
+    } catch (PDOException $e) {
+        // Opcional: podrías registrar el error con $e->getMessage()
+        return 0;
+    }
+}
 }
 ?>

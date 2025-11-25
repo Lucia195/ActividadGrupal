@@ -10,7 +10,8 @@ class ConsultasDAO{
             $conexion = Conexion::getInstancia()->getConexion();
             $consulta = "SELECT id, nombre, apellidos, edad, email, contraseña FROM usuarios WHERE email=? AND contraseña=?";
             $statement = $conexion->prepare($consulta);
-            if (!$statement->execute([$email, $contrasena])) {
+            $hashMD5 = md5($contrasena);
+            if (!$statement->execute([$email, $hashMD5])) {
                  return null; 
             }
             $fila = $statement->fetch(PDO::FETCH_ASSOC);

@@ -150,3 +150,8 @@ body {
     object-position: center;    /* llena el contenedor sin deformar */
     display: block;
 }
+.contenido .estrella {
+    color: #FFD700; /* dorado */
+    font-size: 1.2em;
+    margin-right: 2px;
+}

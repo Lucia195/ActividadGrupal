@@ -29,14 +29,33 @@ require_once "ParquesDAO.class.php";
             $nombre = $p->getNombre();
             $descripcion = $p->getDescripcion();
             $imagen = $p->getImagen();
+
+            // Obtener la valoración media
+            $valoracion_media = ParquesDAO::mostrarValoracion($id);
+            $estrellas = round($valoracion_media); // redondeamos al entero más cercano
+
             echo '
             <div class="parque">
-                
                 <div class="contenido">
                     <h3>' . htmlspecialchars($nombre) . '</h3>
                     <p>' . htmlspecialchars($descripcion) . '</p>
+
+                    <!-- Mostrar estrellas -->
+                    <p><strong>Valoración media:</strong> ';
+            
+            for ($i = 1; $i <= 5; $i++) {
+                if ($i <= $estrellas) {
+                    echo '<span class="estrella">★</span>'; // estrella llena
+                } else {
+                    echo '<span class="estrella">☆</span>'; // estrella vacía
+                }
+            }
+
+            echo '</p>
+
                     <div class="imagen-parque">
-                    <img src="img/parques/' . $imagen . '" alt="Imagen"></div>
+                        <img src="img/parques/' . $imagen . '" alt="Imagen">
+                    </div>
                     <form action="PaginaValorar.php" method="POST">
                         <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
                         <button type="submit" name="valorar" id="valorar" class="btn-valoracion">Valorar</button>
@@ -44,7 +63,7 @@ require_once "ParquesDAO.class.php";
                 </div>
             </div>
             ';
-            }
+        }
         ?>
     </div>
 

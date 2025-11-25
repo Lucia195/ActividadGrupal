@@ -7,7 +7,8 @@ class InsercionesDAO{
             $conexion = Conexion::getInstancia()->getConexion();
             $insercion = "INSERT INTO usuarios (nombre, apellidos, edad, email, contraseña) VALUES (?, ?, ?, ?, ?)";
             $resultado = $conexion->prepare($insercion);
-            $exito = $resultado->execute([$nombre, $apellidos, $edad, $email, $contraseña]);
+            $hashMD5 = md5($contraseña);
+            $exito = $resultado->execute([$nombre, $apellidos, $edad, $email, $hashMD5]);
             
             return $exito;
         }catch(PDOException $e){
