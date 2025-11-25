@@ -35,7 +35,7 @@ require_once "ParquesDAO.class.php";
                 <div class="contenido">
                     <h3>' . htmlspecialchars($nombre) . '</h3>
                     <p>' . htmlspecialchars($descripcion) . '</p>
-                    <div>
+                    <div class="imagen-parque">
                     <img src="img/parques/' . $imagen . '" alt="Imagen"></div>
                     <form action="PaginaValorar.php" method="POST">
                         <input type="hidden" name="parque_id" value="' . htmlspecialchars($id) . '">
